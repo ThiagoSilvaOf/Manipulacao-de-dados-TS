@@ -20,10 +20,10 @@ declare global {
     ["Cliente Novo"]: number;
   }
 
-  interface transacao {
+  interface Transacao {
     status: TransacaoStatus;
     id: number;
-    data: string;
+    data: Date; 
     nome: string;
     email: string;
     moeda: string;
@@ -33,7 +33,7 @@ declare global {
   }
 }
 
-export default function normalizarTransacao(transacao: TransacaoAPI) {
+export default function normalizarTransacao(transacao: TransacaoAPI) : Transacao{
   return {
     status: transacao.Status,
     id: transacao.ID,

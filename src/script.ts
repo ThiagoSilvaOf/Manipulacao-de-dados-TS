@@ -3,10 +3,26 @@ import normalizarTransacao from "./normalizarTransacao.js";
 
 async function handleData() {
   const data =  await fetchData<TransacaoAPI[]>("https://api.origamid.dev/json/transacoes.json?");
-  if(data instanceof Array){
+  if(!data) return null;
     const transacoes = data.map((item) => normalizarTransacao(item))
-    console.log(transacoes);
-  }  
+    preencherTabela(transacoes);
+   
+}
+
+function preencherTabela(transacoes: Transacao[]) : void{
+  const tabela = document.querySelector("#transacoes tbody");
+  if(!tabela) return;
+  transacoes.forEach((transacao) => {
+    tabela.innerHTML += `
+      <tr>
+        <td>${transacao.nome}</td>
+        <td>${transacao.email}</td>
+        <td>${transacao.pagamento}</td>
+        <td>R$${transacao.moeda}</td>
+        <td>${transacao.status}</td>
+      </tr>
+    `
+  })
 }
 
 handleData()
