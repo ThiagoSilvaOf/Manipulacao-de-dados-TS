@@ -11,6 +11,7 @@ async function handleData() {
 }
 function preencherEstatisticas(transacoes) {
     const data = new Estatisticas(transacoes);
+    console.log(data);
     const totalElement = document.querySelector("#total span");
     if (totalElement) {
         totalElement.innerText = data.total.toLocaleString("pt-BR", {
@@ -31,6 +32,10 @@ function preencherEstatisticas(transacoes) {
         <p>Aguardando pagamento: ${data.status["Aguardando pagamento"]}</p>
         <p>Estornada: ${data.status.Estornada}</p>
         <p>Recusada pela operadora de cartão: ${data.status["Recusada pela operadora de cartão"]}</p>`;
+    }
+    const diaElement = document.querySelector("#dia span");
+    if (diaElement) {
+        diaElement.innerText = `${data.melhorDia?.[0]}`;
     }
 }
 function preencherTabela(transacoes) {

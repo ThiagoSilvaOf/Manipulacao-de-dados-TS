@@ -14,6 +14,7 @@ async function handleData() {
 
 function preencherEstatisticas(transacoes: Transacao[]): void {
   const data = new Estatisticas(transacoes);
+  console.log(data);
 
   const totalElement = document.querySelector<HTMLElement>("#total span");
   if (totalElement) {
@@ -37,6 +38,11 @@ function preencherEstatisticas(transacoes: Transacao[]): void {
         <p>Aguardando pagamento: ${data.status["Aguardando pagamento"]}</p>
         <p>Estornada: ${data.status.Estornada}</p>
         <p>Recusada pela operadora de cartão: ${data.status["Recusada pela operadora de cartão"]}</p>`;
+  }
+
+  const diaElement = document.querySelector<HTMLElement>("#dia span");
+  if (diaElement) {
+    diaElement.innerText = `${data.melhorDia?.[0]}`;
   }
 }
 
