@@ -13,7 +13,24 @@ function preencherEstatisticas(transacoes) {
     const data = new Estatisticas(transacoes);
     const totalElement = document.querySelector("#total span");
     if (totalElement) {
-        totalElement.innerText = data.total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        totalElement.innerText = data.total.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        });
+    }
+    const pagamentoElement = document.getElementById("pagamento");
+    if (pagamentoElement) {
+        pagamentoElement.innerHTML += `
+        <p>Cartão de Credito: ${data.pagamento["Cartão de credito"]}</p>
+        <p>Boleto: ${data.pagamento.Boleto}</p>`;
+    }
+    const statusElement = document.getElementById("status");
+    if (statusElement) {
+        statusElement.innerHTML += `
+        <p>Pago: ${data.status.paga}</p>
+        <p>Aguardando pagamento: ${data.status["Aguardando pagamento"]}</p>
+        <p>Estornada: ${data.status.Estornada}</p>
+        <p>Recusada pela operadora de cartão: ${data.status["Recusada pela operadora de cartão"]}</p>`;
     }
 }
 function preencherTabela(transacoes) {
